@@ -1,0 +1,128 @@
+//Adapted from: https://developers.google.com/earth-engine/guides/sentinel1 
+
+
+
+// Filter the collection for the VV product from the descending track
+var collectionVV = ee.ImageCollection('COPERNICUS/S1_GRD')
+    .filter(ee.Filter.eq('instrumentMode', 'IW'))
+    .filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'VV'))
+    .filter(ee.Filter.eq('orbitProperties_pass', 'DESCENDING'))
+    .filterBounds(roi)
+    .select(['VV']);
+print(collectionVV);
+
+// Filter the collection for the VH product from the descending track
+var collectionVH = ee.ImageCollection('COPERNICUS/S1_GRD')
+    .filter(ee.Filter.eq('instrumentMode', 'IW'))
+    .filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'VH'))
+    .filter(ee.Filter.eq('orbitProperties_pass', 'DESCENDING'))
+    .filterBounds(roi)
+    .select(['VH']);
+print(collectionVH);
+
+// Filter the collection for the HV product from the descending track
+var collectionHV = ee.ImageCollection('COPERNICUS/S1_GRD')
+    .filter(ee.Filter.eq('instrumentMode', 'IW'))
+    .filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'HV'))
+    .filter(ee.Filter.eq('orbitProperties_pass', 'DESCENDING'))
+    .filterBounds(roi)
+    .select(['HV']);
+print(collectionHV);
+
+// Filter the collection for the VH product from the descending track
+var collectionHH = ee.ImageCollection('COPERNICUS/S1_GRD')
+    .filter(ee.Filter.eq('instrumentMode', 'IW'))
+    .filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'HH'))
+    .filter(ee.Filter.eq('orbitProperties_pass', 'DESCENDING'))
+    .filterBounds(roi)
+    .select(['HH']);
+print(collectionHH);
+
+//Let's centre the map view over our ROI
+Map.centerObject(roi, 14);
+
+var VV = collectionVV.median();
+
+// Adding the VV layer to the map
+Map.addLayer(VV, {min: -14, max: 10}, 'VV');
+
+//Calculate the VH layer and add it
+var VH = collectionVH.median();
+Map.addLayer(VH, {min: -20, max: 10}, 'VH');
+
+
+//Calculate the HV layer and add it
+var HV = collectionHV.median();
+Map.addLayer(HV, {min: -20, max: 10}, 'HV');
+
+
+//Calculate the HH layer and add it
+var HH = collectionHH.median();
+Map.addLayer(HH, {min: -20, max: 10}, 'HH');
+
+// Create a 3 band stack by selecting from different periods (months)
+var VV1 = ee.Image(collectionVV.filterDate('2015-01-01', '2015-04-30').median());
+var VV2 = ee.Image(collectionVV.filterDate('2015-05-01', '2015-08-31').median());
+var VV3 = ee.Image(collectionVV.filterDate('2015-09-01', '2015-12-31').median());
+
+// Create a 3 band stack by selecting from different periods (months)
+var VV4 = ee.Image(collectionVV.filterDate('2016-01-01', '2016-04-30').median());
+var VV5 = ee.Image(collectionVV.filterDate('2016-05-01', '2016-08-31').median());
+var VV6 = ee.Image(collectionVV.filterDate('2016-09-01', '2016-12-31').median());
+
+// Create a 3 band stack by selecting from different periods (months)
+var VV7 = ee.Image(collectionVV.filterDate('2017-01-01', '2017-04-30').median());
+var VV8 = ee.Image(collectionVV.filterDate('2017-05-01', '2017-08-31').median());
+var VV9 = ee.Image(collectionVV.filterDate('2017-09-01', '2017-12-31').median());
+
+// Create a 3 band stack by selecting from different periods (months)
+var VV10 = ee.Image(collectionVV.filterDate('2018-01-01', '2018-04-30').median());
+var VV11 = ee.Image(collectionVV.filterDate('2018-05-01', '2018-08-31').median());
+var VV12 = ee.Image(collectionVV.filterDate('2018-09-01', '2018-12-31').median());
+
+// Create a 3 band stack by selecting from different periods (months)
+var VV13 = ee.Image(collectionVV.filterDate('2019-01-01', '2019-04-30').median());
+var VV14 = ee.Image(collectionVV.filterDate('2019-05-01', '2019-08-31').median());
+var VV15 = ee.Image(collectionVV.filterDate('2019-09-01', '2019-12-31').median());
+
+// Create a 3 band stack by selecting from different periods (months)
+var VV16 = ee.Image(collectionVV.filterDate('2020-01-01', '2020-04-30').median());
+var VV17 = ee.Image(collectionVV.filterDate('2020-05-01', '2020-08-31').median());
+var VV18 = ee.Image(collectionVV.filterDate('2020-09-01', '2020-12-31').median());
+
+// Create a 3 band stack by selecting from different periods (months)
+var VV19 = ee.Image(collectionVV.filterDate('2021-01-01', '2021-04-30').median());
+var VV20 = ee.Image(collectionVV.filterDate('2021-05-01', '2021-08-31').median());
+var VV21 = ee.Image(collectionVV.filterDate('2021-09-01', '2021-12-31').median());
+
+// Create a 3 band stack by selecting from different periods (months)
+var VV22 = ee.Image(collectionVV.filterDate('2022-01-01', '2022-04-30').median());
+var VV23 = ee.Image(collectionVV.filterDate('2022-05-01', '2022-08-31').median());
+var VV24 = ee.Image(collectionVV.filterDate('2022-09-01', '2022-12-31').median());
+
+//Add to map
+Map.addLayer(VV1.addBands(VV2).addBands(VV3), {min: -12, max: 10}, '2015');
+
+//Add to map
+Map.addLayer(VV4.addBands(VV5).addBands(VV6), {min: -12, max: 10}, '2016');
+
+//Add to map
+Map.addLayer(VV7.addBands(VV8).addBands(VV9), {min: -12, max: 10}, '2017');
+
+//Add to map
+Map.addLayer(VV10.addBands(VV11).addBands(VV12), {min: -12, max: 10}, '2018');
+
+//Add to map
+Map.addLayer(VV13.addBands(VV14).addBands(VV15), {min: -12, max: 10}, '2019');
+
+//Add to map
+Map.addLayer(VV16.addBands(VV17).addBands(VV18), {min: -12, max: 10}, '2020');
+
+//Add to map
+Map.addLayer(VV19.addBands(VV20).addBands(VV21), {min: -12, max: 10}, '2021');
+
+//Add to map
+Map.addLayer(VV22.addBands(VV23).addBands(VV24), {min: -12, max: 10}, '2022');
+
+
+
