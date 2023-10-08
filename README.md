@@ -1,4 +1,4 @@
-# SARt
+# Scientist-Astronauts Make SARt
 NASA space apps challenge 2023 - Create Art with Synthetic Aperture Radar Data
 
 Our team created a map of the Data collected by the Sentinel-1 mission in Google Earth Engine: https://meryemberrada.projects.earthengine.app/view/sart 
