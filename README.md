@@ -8,4 +8,4 @@ Art was made using the basics of geospatial scattering to produce images in high
 The script used in Google Earth Engine is adapted from online resources and is available in the repository. 
 The script for the rotating 3D model of Earth in Three.js is adapted from online resources and is available in the repository. 
 
-A video of the final product of the Space Apps Challenge 2023 is available in YouTube. 
+A video of the final product of the Space Apps Challenge 2023 is available in YouTube: https://www.youtube.com/watch?v=utzuFGcMPOk
